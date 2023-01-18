@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const notFound = require('./middlewares/notFound')
 const error = require('./middlewares/error')
+const morgan = require('morgan');
 
 
 const app = express();
