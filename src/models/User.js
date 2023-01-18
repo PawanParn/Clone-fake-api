@@ -40,11 +40,60 @@ module.exports = (sequelize , DataTypes) => {
         profileImage : {
             type: DataTypes.STRING
         },
-        firstName : {
+        coverImage : {
             type: DataTypes.STRING
         }
     },
         {   underscored : true  }
-    )
+    );
+    User.associate = db => {
+        User.hasMany(db.Post , {
+            foreignKey : {
+                name : 'userId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+
+        User.hasMany(db.Comment , {
+            foreignKey : {
+                name : 'userId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+
+        User.hasMany(db.Like , {
+            foreignKey : {
+                name : 'userId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+
+        User.hasMany(db.Friend , {
+            as : 'Requester',
+            foreignKey : {
+                name : 'requesterId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+
+        User.hasMany(db.Friend , {
+            as : 'Accepter',
+            foreignKey : {
+                name : 'accepterId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+    }
+
     return User; 
 };

@@ -13,8 +13,27 @@ module.exports = (sequelize , DataTypes ) => {
     { 
         underscored : true
     }
-    )
+    );
+    Comment.associate = db => {
+        Comment.belongsTo(db.User, {
+            foriegnKey : {
+                name : 'userId',
+                allownull : false
+            },
+        onDelete : "RESTRICT",
+        onUpdate : "RESTRICT"
+        });
 
+        
+        Comment.belongsTo(db.Post, {
+            foriegnKey : {
+                name : 'postId',
+                allownull : false
+            },
+        onDelete : "RESTRICT",
+        onUpdate : "RESTRICT"
+        });
+    }
 
-    return Post;
+    return Comment;
 };

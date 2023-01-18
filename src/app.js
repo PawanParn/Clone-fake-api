@@ -1,3 +1,7 @@
+// const { sequelize } = require('./models/index');
+// sequelize.sync();
+
+
 require('dotenv').config()
 // const { config } = require('dotenv');
 const express = require('express');

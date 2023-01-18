@@ -2,7 +2,7 @@ const { sequelize, DataTypes } = require("sequelize");
 const { FRIEND_ACCEPTED , FRIEND_PENDING } = require('../config/constants');
 
 module.exports = (sequelize , DataTypes ) => {
-    const Like = sequelize.define('Like',{
+    const Friend = sequelize.define('Friend',{
         status : {
             type : DataTypes.ENUM(FRIEND_ACCEPTED ,FRIEND_PENDING ),
             allownull : false ,
@@ -12,8 +12,30 @@ module.exports = (sequelize , DataTypes ) => {
     { 
         underscored : true
     }
-    )
+    );
+    Friend.associate = db => {
+        Friend.belongsTo(db.User, {
+            as : 'Requester',
+            foreignKey : {
+                name : 'requesterId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+
+        Friend.belongsTo(db.User, {
+            as : 'Accepter',
+            foreignKey : {
+                name : 'accepterId',
+                allownull : false
+            },
+            onDelete : 'RESTRICT' ,
+            onUpdate : 'RESTRICT'
+        });
+        
+    }
 
 
-    return Like;
+    return Friend;
 };
