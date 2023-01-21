@@ -56,6 +56,10 @@ exports.login  = async(req , res , next ) => {
     try{
       const { emailOrMobile , password } = req.body;
 
+      if(typeof emailOrMobile !== "string" || typeof password !== "string"){
+        throw (new AppError('email address or mobile or password is invalid', 400));
+      };
+
       const user = await User.findOne({where : 
       {
         [Op.or] :[
