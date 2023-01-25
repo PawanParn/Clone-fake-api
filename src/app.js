@@ -9,6 +9,7 @@ const morgan = require('morgan');
 
 
 const authRoute = require('./routes/authRoute');
+const userRoute = require('./routes/userRoute');
 
 const notFound = require('./middlewares/notFound')
 const error = require('./middlewares/error')
@@ -22,10 +23,11 @@ if(process.env.NODE_ENV === 'development' ){
 }; 
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json());   ///use for handle application/json
+app.use(express.urlencoded({ extended: false }));  //use for handle x-www.form-urlencoded
 
 app.use('/auth', authRoute);
+app.use('/users', userRoute);
 
 
 app.use(notFound);
