@@ -1,6 +1,8 @@
 const cloudinary = require('../utils/cloundinary');
-const { User } = require('../models/index');
+const { User , Friend  } = require('../models/index');
 const fs = require('fs')
+const Apperror = require('../utils/appError');
+const friendService = require('../services/friendService')
 
 
 exports.updateUser = async(req , res ,next ) => {
@@ -8,7 +10,7 @@ exports.updateUser = async(req , res ,next ) => {
 
         const { password , ...updateValue } = req.body;
 
-        
+        const params = use
 
         if(req.files.profileImage){
 
@@ -43,5 +45,26 @@ exports.updateUser = async(req , res ,next ) => {
         res.status(200).json({user : updateU });
     }catch(err){
         next(err);
+    }
+};
+
+
+exports.getUserFriend = async (req , res , next ) =>{
+    try{
+        const { id } = req.params;
+        const user = await User.findOne({ where : {id } , attributes : {exclude: 'password'}});
+
+        if(!user){
+            throw new Apperror('User not found',400)
+        };
+
+        const friends = await friendService.findUserFriendsByUserId(id);
+
+        const statusWithMe =await friendService.findStatusWithMe(req.user.id , id);
+
+        res.status(200).json({ user , friends , statusWithMe })
+
+    }catch(err){
+        next(err)
     }
 };

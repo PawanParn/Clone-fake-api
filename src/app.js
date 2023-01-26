@@ -13,7 +13,7 @@ const userRoute = require('./routes/userRoute');
 
 const notFound = require('./middlewares/notFound')
 const error = require('./middlewares/error')
-
+const authenticate = require('./middlewares/authenticate');
 
 
 const app = express();
@@ -27,7 +27,7 @@ app.use(express.json());   ///use for handle application/json
 app.use(express.urlencoded({ extended: false }));  //use for handle x-www.form-urlencoded
 
 app.use('/auth', authRoute);
-app.use('/users', userRoute);
+app.use('/users',authenticate, userRoute);
 
 
 app.use(notFound);
