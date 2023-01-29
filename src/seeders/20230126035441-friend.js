@@ -51,6 +51,55 @@ module.exports = {
         updated_at : new Date() ,
         requester_id :  13,
         accepter_id : 7
+      },
+      {
+        status : FRIEND_ACCEPTED ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  1,
+        accepter_id : 24
+      },
+      {
+        status : FRIEND_ACCEPTED ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  1,
+        accepter_id : 25
+      },
+      {
+        status : FRIEND_ACCEPTED ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  1,
+        accepter_id : 17
+      },
+      {
+        status : FRIEND_ACCEPTED ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  1,
+        accepter_id : 19
+      },
+      {
+        status : FRIEND_PENDING ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  1,
+        accepter_id : 20
+      },
+      {
+        status : FRIEND_PENDING ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  1,
+        accepter_id : 21
+      },
+      {
+        status : FRIEND_PENDING ,
+        created_at : new Date() ,
+        updated_at : new Date() ,
+        requester_id :  13,
+        accepter_id : 1
       }
     ])
 
@@ -63,5 +112,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    return  queryInterface.bulkDelete('friends',null,{});
   }
 };

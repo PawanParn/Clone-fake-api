@@ -10,7 +10,7 @@ exports.updateUser = async(req , res ,next ) => {
 
         const { password , ...updateValue } = req.body;
 
-        const params = use
+   
 
         if(req.files.profileImage){
 
@@ -51,7 +51,7 @@ exports.updateUser = async(req , res ,next ) => {
 
 exports.getUserFriend = async (req , res , next ) =>{
     try{
-        const { id } = req.params;
+        const id = +req.params.id;
         const user = await User.findOne({ where : {id } , attributes : {exclude: 'password'}});
 
         if(!user){
