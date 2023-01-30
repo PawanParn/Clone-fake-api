@@ -5,6 +5,10 @@ const friendController = require('../controller/friendController')
 
 const router = express.Router();
 
-router.delete('/:friendId',friendController.deleteFriend);
+router
+    .route('/:friendId')
+    .delete(friendController.deleteFriend)
+    .post(friendController.createFriend)
+    .patch(friendController.updateFriend);
 
 module.exports = router
